@@ -115,6 +115,39 @@ The data on the right are the unseen ones by the optimized weights.""")
         st.dataframe(stock_amount)
         st.text("The sum of the amounts might not be equal to the total investment because each of them was rounded down.")
 
+    # technical details
+    with st.expander('See technical details'):
+        sentence1 = '''This app optimizes the weights of stocks in a portfolio. 
+It maximizes both of capital gain and stability of portfolio price using a mathematical optimization library "scipy.optimize."
+The balance between these two factors are decided by alpha parameter.
+The stock data are fetched using a library "pandas_datareader."
+Here is the detail of the cost function to be maximized.
+The equation says "minimize" however if the function is multiplied by -1 it's the same thing.'''
+        st.write(sentence1)
+        latex = r'''
+\underset{w} {\text{minimize}} L(w) = \underset{w} {\text{minimize}} -\left( \text{capital gain}(w) \right) + \alpha \left( \text{fluctuation}(w)  \right) \\
+\text{capital gain}(w) = s(m-1) \\
+\text{fluctuation}(w) = \sqrt{\frac{\sum_{i}(d_i - \frac{\sum d_i}{m-1})^2}{m-2}} \\
+d = \{ r_i - r_{i-1} \mid 1 \leq i \leq m-1 \} \\
+r_j = q_j - l_j \\
+l_j = sj + t \\
+s = \frac{\sum_{j} (q_j - c_y)(j - c_x)}{\sum_{j} (j - c_x)^2}, t = \frac{c_y - s}{c_x}\\
+(c_x = \frac{\sum_{j} j}{m}, c_y = \frac{\sum_{j} q_j}{m}) \\
+q_j = \sum_{i=0}^{n-1} w_i p_j^i \\'''
+        st.latex(latex)
+        latex_exp = r'''- $n$: the number of stocks in the portfolio
+- $m$: the number of records, which is the number of days, in the training dataset
+- $w$: the weights of stocks
+- $p$: the prices of stocks
+- $q$: the $l$ is the regression line of the portfolio price
+- $s$: its slope
+- $t$: its intercept
+- $r$: the fluctuation of the stock prices on the regression lines
+- $d$: the daily fluctuation of the stock prices
+- $\text{fluctuation}$: the unbiased standard deviation of the daily fluctuation
+- $\text{capital gain}$: the increase of the stock price on the regression line'''
+        st.markdown(latex_exp)
+
 
 if __name__ == '__main__':
     main()
