@@ -17,7 +17,6 @@ import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 
 
-@st.cache
 def load_nasdaq_data():
     return pd.read_pickle('nasdaq.pickle')
 
@@ -68,14 +67,17 @@ def main():
 
     # load nasdaq stock data
     nasdaq = load_nasdaq_data()
+    nasdaq.oldest_date = pd.to_datetime(nasdaq.oldest_date)
     # has 1 year in data length
     nasdaq['has_enough_period'] = has_enough_period(nasdaq)
     nasdaq = nasdaq[nasdaq['has_enough_period']]
     # list of stocks
     options = nasdaq.symbol.to_list()
     # multi selection
+    stocks = ['MSFT', 'AAPL', 'UNH', 'MDT',
+              'RTX', 'SNPS', 'ZTS', 'DE', 'MCD', 'CTAS']
     selected_stocks = st.multiselect(
-        '🏦Which stocks do you want to buy? (NASDAQ)', options, default=['MSFT', 'GOOGL', 'AMZN', 'META', 'NFLX'])
+        '🏦Which stocks do you want to buy? (NASDAQ)', options, default=stocks)
 
     # get a dataframe for selected stocks
     if len(selected_stocks) > 0:
