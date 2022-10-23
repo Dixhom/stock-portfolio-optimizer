@@ -14,11 +14,17 @@ import pandas as pd
 import numpy as np
 import optimize as opt
 import matplotlib.pyplot as plt
+from datetime import datetime, timedelta
 
 
 @st.cache
 def load_nasdaq_data():
     return pd.read_pickle('nasdaq.pickle')
+
+
+def has_enough_period(nasdaq):
+    today = datetime.today() - timedelta(year=1)  # one year
+    return nasdaq.oldest_date < today
 
 
 def draw_graphs(plot_area, df, test_vline):
@@ -62,6 +68,9 @@ def main():
 
     # load nasdaq stock data
     nasdaq = load_nasdaq_data()
+    # has 1 year in data length
+    nasdaq['has_enough_period'] = has_enough_period(nasdaq)
+    nasdaq = nasdaq[nasdaq['has_enough_period']]
     # list of stocks
     options = nasdaq.symbol.to_list()
     # multi selection
