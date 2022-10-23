@@ -23,7 +23,7 @@ def load_nasdaq_data():
 
 
 def has_enough_period(nasdaq):
-    today = datetime.today() - timedelta(year=1)  # one year
+    today = datetime.today() - timedelta(days=366)  # one year
     return nasdaq.oldest_date < today
 
 
