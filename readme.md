@@ -8,8 +8,8 @@ The balance between these two factors are decided by alpha parameter.
 # Technical detail about the optimization
 
 $$
-\underset{w} {\text{minimize}} L(w) = \underset{w} {\text{minimize}} -\left( \text{capital gain}(w) \right) + \alpha \left( \text{fluctuation}(w)  \right)\\
-\text{capital gain}(w) = s(m-1)<br>
+\underset{w} {\text{minimize}} L(w) = \underset{w} {\text{minimize}} -\left( \text{capital gain}(w) \right) + \alpha \left( \text{fluctuation}(w)  \right)  
+\text{capital gain}(w) = s(m-1)  
 \text{fluctuation}(w) = \sqrt{\frac{\sum_{i}(d_i - \frac{\sum d_i}{m-1})^2}{m-2}}\
 d = \{ r_i - r_{i-1} \mid 1 \leq i \leq m-1 \} \\
 r_j = q_j - l_j \\
