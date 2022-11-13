@@ -19,8 +19,8 @@ s = \frac{\sum_{j} (q_j - c_y)(j - c_x)}{\sum_{j} (j - c_x)^2}, t = \frac{c_y - 
 q_j = \sum_{i=0}^{n-1} w_i p_j^i
 ```
 
-$$\underset{w} {\text{minimize}} L(w) = \underset{w} {\text{minimize}} -\left( \text{capital gain}(w) \right) + \alpha \left( \text{fluctuation}(w)  \right)$$  
-$$\text{capital gain}(w) = s(m-1)$$  
+$\underset{w} {\text{minimize}} L(w) = \underset{w} {\text{minimize}} -\left( \text{capital gain}(w) \right) + \alpha \left( \text{fluctuation}(w)  \right)$  
+$\text{capital gain}(w) = s(m-1)$  
 
 
 where $n$ is the number of stocks in the portfolio, $m$ is the number of records, which is the number of days, in the training dataset, $w$ is the weights of stocks, $p$ is the prices of stocks, $q$ is the $l$ is the regression line of the portfolio price, $s$ is its slope, $t$ is its intercept, $r$ is the fluctuation of the stock prices on the regression lines, $d$ is the daily fluctuation of the stock prices, $\text{fluctuation}$ is the unbiased standard deviation of the daily fluctuation and $\text{capital gain}$ is the increase of the stock price on the regression line.
